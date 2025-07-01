@@ -915,3 +915,122 @@ p {
     }
 }
 
+
+/* Fixed Hero Title Styles */
+.hero-subtitle-text {
+    color: #ffffff;
+    font-weight: 600;
+    display: block;
+    margin-top: 0.5rem;
+}
+
+.hero-subtitle-main {
+    font-size: 1.5rem;
+    color: #ffffff;
+    font-weight: 600;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .hero-subtitle-main {
+        font-size: 1.2rem;
+    }
+    
+    .hero-subtitle-text {
+        font-size: 1.8rem;
+    }
+}
+
+
+/* Floating Social Widgets */
+.floating-widgets {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 1000;
+}
+
+.floating-widget {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.floating-widget svg {
+    width: 30px;
+    height: 30px;
+    color: white;
+}
+
+.whatsapp-widget {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+}
+
+.whatsapp-widget:hover {
+    background: linear-gradient(135deg, #128C7E 0%, #075E54 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
+}
+
+.telegram-widget {
+    background: linear-gradient(135deg, #0088cc 0%, #005577 100%);
+}
+
+.telegram-widget:hover {
+    background: linear-gradient(135deg, #005577 0%, #003344 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(0, 136, 204, 0.4);
+}
+
+.floating-widget:active {
+    transform: translateY(-1px);
+}
+
+/* Responsive adjustments for floating widgets */
+@media (max-width: 768px) {
+    .floating-widgets {
+        bottom: 15px;
+        right: 15px;
+        gap: 12px;
+    }
+    
+    .floating-widget {
+        width: 55px;
+        height: 55px;
+    }
+    
+    .floating-widget svg {
+        width: 26px;
+        height: 26px;
+    }
+}
+
+@media (max-width: 480px) {
+    .floating-widgets {
+        bottom: 10px;
+        right: 10px;
+        gap: 10px;
+    }
+    
+    .floating-widget {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .floating-widget svg {
+        width: 24px;
+        height: 24px;
+    }
+}
+

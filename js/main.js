@@ -203,7 +203,7 @@ function initCTAButtons() {
         whatsappBtn.addEventListener('click', function(e) {
             e.preventDefault();
             const message = encodeURIComponent('🚀 Здравствуйте! Хочу получить бесплатную консультацию по ИИ-ассистенту');
-            const phoneNumber = '77777777777'; // Replace with actual phone number
+            const phoneNumber = '77781047378'; // Updated phone number
             window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
         });
     }
@@ -458,7 +458,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (name && phone) {
             // Create WhatsApp message
             const message = `Здравствуйте! Меня зовут ${name}. Хочу получить демо-версию ИИ-ассистента на 3 дня. Мой телефон: ${phone}`;
-            const whatsappUrl = `https://wa.me/77777777777?text=${encodeURIComponent(message)}`;
+            const whatsappUrl = `https://wa.me/77781047378?text=${encodeURIComponent(message)}`;
             
             // Open WhatsApp
             window.open(whatsappUrl, '_blank');
