@@ -78,7 +78,12 @@
     }
     
     .mobile-menu {
-        display: block;
+        display: block !important;
+    }
+    
+    .mobile-menu.active {
+        display: block !important;
+        transform: translateX(0) !important;
     }
     
     .logo h2 {
