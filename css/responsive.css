@@ -1,0 +1,330 @@
+/* Responsive Design */
+
+/* Tablet Styles */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 var(--spacing-md);
+    }
+    
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-2xl);
+        text-align: center;
+    }
+    
+    .hero-title {
+        font-size: var(--font-size-5xl);
+    }
+    
+    .audience-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-2xl);
+    }
+    
+    .audience-visual {
+        order: -1;
+    }
+    
+    .solution-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+    
+    .process-steps {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    
+    .cta-steps {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        gap: var(--spacing-lg);
+        text-align: center;
+    }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    :root {
+        --font-size-6xl: 2.5rem;
+        --font-size-5xl: 2rem;
+        --font-size-4xl: 1.75rem;
+        --font-size-3xl: 1.5rem;
+        --spacing-4xl: 3rem;
+        --spacing-3xl: 2rem;
+    }
+    
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+    
+    /* Header */
+    .header-content {
+        flex-wrap: wrap;
+        gap: var(--spacing-md);
+    }
+    
+    .nav {
+        display: none;
+    }
+    
+    .logo h2 {
+        font-size: var(--font-size-xl);
+    }
+    
+    /* Hero */
+    .hero {
+        padding: var(--spacing-3xl) 0;
+        min-height: 90vh;
+    }
+    
+    .hero-title {
+        font-size: var(--font-size-4xl);
+        line-height: 1.2;
+    }
+    
+    .hero-subtitle {
+        font-size: var(--font-size-lg);
+    }
+    
+    .hero-description {
+        font-size: var(--font-size-base);
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn-large {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    /* Sections */
+    .section-title {
+        font-size: var(--font-size-3xl);
+    }
+    
+    .section-subtitle {
+        font-size: var(--font-size-base);
+    }
+    
+    /* Audience */
+    .audience-item {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--spacing-md);
+    }
+    
+    .audience-icon {
+        align-self: center;
+    }
+    
+    /* Statistics */
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+    
+    .stat-number {
+        font-size: var(--font-size-4xl);
+    }
+    
+    /* Solution */
+    .solution-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Process */
+    .process-steps {
+        grid-template-columns: 1fr;
+    }
+    
+    /* CTA */
+    .cta-title {
+        font-size: var(--font-size-3xl);
+    }
+    
+    .cta-main-title {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .cta-benefits {
+        grid-template-columns: 1fr;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    /* Footer */
+    .footer-links {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+}
+
+/* Small Mobile Styles */
+@media (max-width: 480px) {
+    :root {
+        --font-size-4xl: 1.5rem;
+        --font-size-3xl: 1.25rem;
+        --spacing-3xl: 1.5rem;
+        --spacing-2xl: 1rem;
+    }
+    
+    .hero-title {
+        font-size: var(--font-size-3xl);
+    }
+    
+    .hero-subtitle {
+        font-size: var(--font-size-base);
+    }
+    
+    .section-title {
+        font-size: var(--font-size-2xl);
+    }
+    
+    .audience-item,
+    .solution-card,
+    .process-step {
+        padding: var(--spacing-lg);
+    }
+    
+    .cta-main {
+        padding: var(--spacing-xl);
+    }
+    
+    .stat-number {
+        font-size: var(--font-size-3xl);
+    }
+}
+
+/* Landscape Mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero {
+        min-height: 100vh;
+        padding: var(--spacing-2xl) 0;
+    }
+    
+    .hero-content {
+        gap: var(--spacing-xl);
+    }
+    
+    .hero-title {
+        font-size: var(--font-size-3xl);
+    }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .robot-image,
+    .statistics-bg {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    /* Already using dark theme by default */
+}
+
+/* Print Styles */
+@media print {
+    * {
+        background: white !important;
+        color: black !important;
+        box-shadow: none !important;
+    }
+    
+    .header,
+    .footer,
+    .hero-bg-animation,
+    .statistics-bg {
+        display: none !important;
+    }
+    
+    .hero,
+    .audience,
+    .statistics,
+    .solution,
+    .process,
+    .cta {
+        page-break-inside: avoid;
+        margin-bottom: 2rem;
+    }
+    
+    .btn {
+        border: 1px solid black;
+        background: white;
+        color: black;
+    }
+}
+
+/* Focus Styles for Accessibility */
+.btn:focus,
+.nav-link:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    :root {
+        --text-gray: #ffffff;
+        --text-light-gray: #ffffff;
+    }
+    
+    .audience-item,
+    .solution-card,
+    .process-step {
+        border: 2px solid var(--primary-color);
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .nav-link {
+        padding: var(--spacing-sm);
+    }
+    
+    .audience-item:hover,
+    .solution-card:hover,
+    .process-step:hover {
+        transform: none;
+    }
+    
+    .audience-item:active,
+    .solution-card:active,
+    .process-step:active {
+        transform: scale(0.98);
+    }
+}
+
