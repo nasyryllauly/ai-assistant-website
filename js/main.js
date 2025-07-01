@@ -422,3 +422,53 @@ window.addEventListener('scroll', throttle(function() {
     // Scroll-dependent functions are already optimized above
 }, 16)); // ~60fps
 
+
+
+// CTA Form Handler
+document.addEventListener('DOMContentLoaded', function() {
+    const ctaForm = document.getElementById('ctaForm');
+    const phoneInput = document.getElementById('userPhone');
+    
+    // Phone number formatting
+    phoneInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 0) {
+            if (value.length <= 1) {
+                value = '+7 (' + value;
+            } else if (value.length <= 4) {
+                value = '+7 (' + value.substring(1);
+            } else if (value.length <= 7) {
+                value = '+7 (' + value.substring(1, 4) + ') ' + value.substring(4);
+            } else if (value.length <= 9) {
+                value = '+7 (' + value.substring(1, 4) + ') ' + value.substring(4, 7) + '-' + value.substring(7);
+            } else {
+                value = '+7 (' + value.substring(1, 4) + ') ' + value.substring(4, 7) + '-' + value.substring(7, 9) + '-' + value.substring(9, 11);
+            }
+        }
+        e.target.value = value;
+    });
+    
+    // Form submission
+    ctaForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('userName').value;
+        const phone = document.getElementById('userPhone').value;
+        
+        if (name && phone) {
+            // Create WhatsApp message
+            const message = `Здравствуйте! Меня зовут ${name}. Хочу получить демо-версию ИИ-ассистента на 3 дня. Мой телефон: ${phone}`;
+            const whatsappUrl = `https://wa.me/77777777777?text=${encodeURIComponent(message)}`;
+            
+            // Open WhatsApp
+            window.open(whatsappUrl, '_blank');
+            
+            // Show success message
+            alert('Спасибо за заявку! Мы свяжемся с вами в ближайшее время.');
+            
+            // Reset form
+            ctaForm.reset();
+        }
+    });
+});
+
