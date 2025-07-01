@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initCounterAnimations();
     initParallaxEffects();
     
-    console.log('AI Assistant website loaded successfully!');
+    console.log('AqylChat Pro website loaded successfully!');
 });
 
 // Smooth scrolling for navigation links
@@ -131,15 +131,17 @@ function createMobileMenuButton() {
             
             .mobile-nav {
                 position: fixed;
-                top: 70px;
+                top: 0;
                 left: 0;
                 right: 0;
                 background: rgba(10, 14, 39, 0.98);
                 backdrop-filter: blur(10px);
-                padding: 2rem;
+                padding: 80px 2rem 2rem 2rem;
                 transform: translateY(-100%);
                 transition: transform 0.3s ease;
-                z-index: 999;
+                z-index: 998;
+                height: 100vh;
+                overflow-y: auto;
             }
             
             .mobile-nav.active {
