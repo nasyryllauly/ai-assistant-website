@@ -69,6 +69,18 @@
         display: none;
     }
     
+    .header-actions .btn {
+        display: none;
+    }
+    
+    .mobile-menu-toggle {
+        display: flex !important;
+    }
+    
+    .mobile-menu {
+        display: block;
+    }
+    
     .logo h2 {
         font-size: var(--font-size-xl);
     }
