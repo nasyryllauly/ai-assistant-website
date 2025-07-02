@@ -166,7 +166,7 @@ function initCTAButtons() {
             submitBtn.disabled = true;
             
             // Send data to server
-            fetch('https://0vhlizcp0w8m.manus.space/submit-form', {
+            fetch('https://9yhyi3cqg6vg.manus.space/submit-form', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -179,10 +179,15 @@ function initCTAButtons() {
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
+                    // Show success notification
                     showNotification(data.message, 'success');
+                    
                     // Clear form
                     nameInput.value = '';
                     phoneInput.value = '';
+                    
+                    // Show thank you message
+                    showThankYouMessage();
                 } else {
                     showNotification(data.message || 'Произошла ошибка', 'error');
                 }
@@ -354,6 +359,100 @@ function showNotification(message, type = 'info') {
             notification.remove();
         }, 300);
     }, 5000);
+}
+
+// Show thank you message
+function showThankYouMessage() {
+    // Create overlay
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 20000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    `;
+    
+    // Create thank you card
+    const thankYouCard = document.createElement('div');
+    thankYouCard.style.cssText = `
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        border-radius: 20px;
+        padding: 3rem 2rem;
+        text-align: center;
+        max-width: 500px;
+        width: 90%;
+        color: white;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transform: scale(0.8);
+        transition: transform 0.3s ease;
+    `;
+    
+    thankYouCard.innerHTML = `
+        <div style="font-size: 4rem; margin-bottom: 1rem;">🎉</div>
+        <h2 style="color: #00ff88; margin-bottom: 1rem; font-size: 2rem;">Спасибо!</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 1.5rem; line-height: 1.6;">
+            Ваша заявка успешно отправлена!<br>
+            Мы свяжемся с вами в ближайшее время.
+        </p>
+        <div style="background: rgba(255, 107, 53, 0.1); border: 1px solid #ff6b35; border-radius: 10px; padding: 1rem; margin-bottom: 2rem;">
+            <p style="margin: 0; color: #ff6b35; font-weight: 500;">
+                ⚡ Обычно мы отвечаем в течение 10 минут
+            </p>
+        </div>
+        <button id="closeThankYou" style="
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        ">Закрыть</button>
+    `;
+    
+    overlay.appendChild(thankYouCard);
+    document.body.appendChild(overlay);
+    
+    // Animate in
+    setTimeout(() => {
+        overlay.style.opacity = '1';
+        thankYouCard.style.transform = 'scale(1)';
+    }, 100);
+    
+    // Close button handler
+    const closeBtn = thankYouCard.querySelector('#closeThankYou');
+    closeBtn.addEventListener('click', () => {
+        overlay.style.opacity = '0';
+        thankYouCard.style.transform = 'scale(0.8)';
+        setTimeout(() => {
+            overlay.remove();
+        }, 300);
+    });
+    
+    // Close on overlay click
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+            closeBtn.click();
+        }
+    });
+    
+    // Auto close after 10 seconds
+    setTimeout(() => {
+        if (document.body.contains(overlay)) {
+            closeBtn.click();
+        }
+    }, 10000);
 }
 
 // Intersection Observer for animations
