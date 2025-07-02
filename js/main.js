@@ -170,7 +170,7 @@ function initCTAButtons() {
             const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
             
             // Send data to server
-            fetch('https://nghki1c8qgln.manus.space/submit-form?v=' + Date.now(), {
+            fetch('https://nghki1c8qgvv.manus.space/submit-form?v=' + Date.now() + '&t=' + Math.random(), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
