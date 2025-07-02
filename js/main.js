@@ -165,8 +165,12 @@ function initCTAButtons() {
             submitBtn.textContent = 'ОТПРАВЛЯЕМ...';
             submitBtn.disabled = true;
             
+            // Add timeout to prevent hanging
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+            
             // Send data to server
-            fetch('https://lnh8imcd9kyw.manus.space/submit-form?v=' + Date.now(), {
+            fetch('https://nghki1c8qgln.manus.space/submit-form?v=' + Date.now(), {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -174,9 +178,16 @@ function initCTAButtons() {
                 body: JSON.stringify({
                     name: name,
                     phone: phone
-                })
+                }),
+                signal: controller.signal
             })
-            .then(response => response.json())
+            .then(response => {
+                clearTimeout(timeoutId);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
                 if (data.status === 'success') {
                     // Show success notification
@@ -193,11 +204,16 @@ function initCTAButtons() {
                 }
             })
             .catch(error => {
+                clearTimeout(timeoutId);
                 console.error('Error:', error);
-                showNotification('Произошла ошибка при отправке. Попробуйте еще раз.', 'error');
+                if (error.name === 'AbortError') {
+                    showNotification('Превышено время ожидания. Попробуйте еще раз.', 'error');
+                } else {
+                    showNotification('Произошла ошибка при отправке. Попробуйте еще раз.', 'error');
+                }
             })
             .finally(() => {
-                // Restore button
+                // Restore button immediately
                 submitBtn.textContent = originalText;
                 submitBtn.disabled = false;
             });
