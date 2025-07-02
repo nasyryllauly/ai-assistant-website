@@ -528,28 +528,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         e.target.value = value;
     });
-    
-    // Form submission
-    ctaForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const name = document.getElementById('userName').value;
-        const phone = document.getElementById('userPhone').value;
-        
-        if (name && phone) {
-            // Create WhatsApp message
-            const message = `Здравствуйте! Меня зовут ${name}. Хочу получить демо-версию ИИ-ассистента на 3 дня. Мой телефон: ${phone}`;
-            const whatsappUrl = `https://wa.me/77781047378?text=${encodeURIComponent(message)}`;
-            
-            // Open WhatsApp
-            window.open(whatsappUrl, '_blank');
-            
-            // Show success message
-            alert('Спасибо за заявку! Мы свяжемся с вами в ближайшее время.');
-            
-            // Reset form
-            ctaForm.reset();
-        }
-    });
 });
 
