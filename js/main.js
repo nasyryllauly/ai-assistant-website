@@ -122,6 +122,7 @@ function initMobileMenu() {
 function initCTAButtons() {
     const whatsappBtn = document.getElementById('whatsapp-btn');
     const calendarBtn = document.getElementById('calendar-btn');
+    const ctaForm = document.getElementById('ctaForm');
     
     if (whatsappBtn) {
         whatsappBtn.addEventListener('click', function(e) {
@@ -138,6 +139,63 @@ function initCTAButtons() {
             // Here you would integrate with a calendar booking system
             // For now, we'll show an alert
             alert('Функция записи на консультацию будет доступна в ближайшее время. Пожалуйста, свяжитесь с нами через WhatsApp.');
+        });
+    }
+    
+    // Handle CTA form submission
+    if (ctaForm) {
+        ctaForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nameInput = document.getElementById('userName');
+            const phoneInput = document.getElementById('userPhone');
+            const submitBtn = ctaForm.querySelector('.cta-form-btn');
+            
+            const name = nameInput.value.trim();
+            const phone = phoneInput.value.trim();
+            
+            // Validation
+            if (!name || !phone) {
+                showNotification('Пожалуйста, заполните все поля', 'error');
+                return;
+            }
+            
+            // Disable button and show loading
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'ОТПРАВЛЯЕМ...';
+            submitBtn.disabled = true;
+            
+            // Send data to server
+            fetch('https://0vhlizcp0w8m.manus.space/submit-form', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: name,
+                    phone: phone
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    showNotification(data.message, 'success');
+                    // Clear form
+                    nameInput.value = '';
+                    phoneInput.value = '';
+                } else {
+                    showNotification(data.message || 'Произошла ошибка', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('Произошла ошибка при отправке. Попробуйте еще раз.', 'error');
+            })
+            .finally(() => {
+                // Restore button
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
         });
     }
 }
