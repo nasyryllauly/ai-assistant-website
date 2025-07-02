@@ -166,7 +166,7 @@ function initCTAButtons() {
             submitBtn.disabled = true;
             
             // Send data to server
-            fetch('https://9yhyi3cqg6vg.manus.space/submit-form', {
+            fetch('https://9yhyi3cqg7pv.manus.space/submit-form', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
