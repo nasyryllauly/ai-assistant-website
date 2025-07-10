@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initMobileMenu();
     initCTAButtons();
     initVideoPlayer();
-    initFormValidation();
     initCounterAnimations();
     initParallaxEffects();
     
@@ -122,7 +121,6 @@ function initMobileMenu() {
 function initCTAButtons() {
     const whatsappBtn = document.getElementById('whatsapp-btn');
     const calendarBtn = document.getElementById('calendar-btn');
-    const ctaForm = document.getElementById('ctaForm');
     
     if (whatsappBtn) {
         whatsappBtn.addEventListener('click', function(e) {
@@ -142,83 +140,8 @@ function initCTAButtons() {
         });
     }
     
-    // Handle CTA form submission
-    if (ctaForm) {
-        ctaForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const nameInput = document.getElementById('userName');
-            const phoneInput = document.getElementById('userPhone');
-            const submitBtn = ctaForm.querySelector('.cta-form-btn');
-            
-            const name = nameInput.value.trim();
-            const phone = phoneInput.value.trim();
-            
-            // Validation
-            if (!name || !phone) {
-                showNotification('Пожалуйста, заполните все поля', 'error');
-                return;
-            }
-            
-            // Disable button and show loading
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'ОТПРАВЛЯЕМ...';
-            submitBtn.disabled = true;
-            
-            // Add timeout to prevent hanging
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
-            
-            // Send data to server
-            fetch('https://nghki1c8qgvv.manus.space/submit-form?v=' + Date.now() + '&t=' + Math.random(), {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    name: name,
-                    phone: phone
-                }),
-                signal: controller.signal
-            })
-            .then(response => {
-                clearTimeout(timeoutId);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.status === 'success') {
-                    // Show success notification
-                    showNotification(data.message, 'success');
-                    
-                    // Clear form
-                    nameInput.value = '';
-                    phoneInput.value = '';
-                    
-                    // Show thank you message
-                    showThankYouMessage();
-                } else {
-                    showNotification(data.message || 'Произошла ошибка', 'error');
-                }
-            })
-            .catch(error => {
-                clearTimeout(timeoutId);
-                console.error('Error:', error);
-                if (error.name === 'AbortError') {
-                    showNotification('Превышено время ожидания. Попробуйте еще раз.', 'error');
-                } else {
-                    showNotification('Произошла ошибка при отправке. Попробуйте еще раз.', 'error');
-                }
-            })
-            .finally(() => {
-                // Restore button immediately
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            });
-        });
-    }
+    // Note: CTA form has been replaced with direct WhatsApp link
+    // No form handling needed anymore
 }
 
 // Video player functionality
@@ -521,28 +444,5 @@ window.addEventListener('scroll', throttle(function() {
 
 
 
-// CTA Form Handler
-document.addEventListener('DOMContentLoaded', function() {
-    const ctaForm = document.getElementById('ctaForm');
-    const phoneInput = document.getElementById('userPhone');
-    
-    // Phone number formatting
-    phoneInput.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\D/g, '');
-        if (value.length > 0) {
-            if (value.length <= 1) {
-                value = '+7 (' + value;
-            } else if (value.length <= 4) {
-                value = '+7 (' + value.substring(1);
-            } else if (value.length <= 7) {
-                value = '+7 (' + value.substring(1, 4) + ') ' + value.substring(4);
-            } else if (value.length <= 9) {
-                value = '+7 (' + value.substring(1, 4) + ') ' + value.substring(4, 7) + '-' + value.substring(7);
-            } else {
-                value = '+7 (' + value.substring(1, 4) + ') ' + value.substring(4, 7) + '-' + value.substring(7, 9) + '-' + value.substring(9, 11);
-            }
-        }
-        e.target.value = value;
-    });
-});
+// Note: CTA Form Handler removed - form replaced with direct WhatsApp link
 
